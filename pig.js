@@ -109,6 +109,7 @@ function hold() {
       document.querySelector(".current-score-1").textContent =
         player_1_currentScore;
       document.querySelector(".header-1").style.color = "#C7365F";
+      document.querySelector(".dice").classList.add("hidden");
       return 0;
     }
     player_1_turn = false;
@@ -140,38 +141,44 @@ function hold() {
   }
 }
 function gamePlay() {
-  let dice = rollDice();
-  if (dice != 1) {
-    if (player_1_turn) {
-      player_1_currentScore += dice;
-      document.querySelector(".current-score-1").textContent =
-        player_1_currentScore;
+  if (player_1_totalScore <= 100 && player_2_totalScore <= 100) {
+    let dice = rollDice();
+    if (dice != 1) {
+      if (player_1_turn) {
+        player_1_currentScore += dice;
+        document.querySelector(".current-score-1").textContent =
+          player_1_currentScore;
+      } else {
+        player_2_currentScore += dice;
+        document.querySelector(".current-score-2").textContent =
+          player_2_currentScore;
+      }
     } else {
-      player_2_currentScore += dice;
-      document.querySelector(".current-score-2").textContent =
-        player_2_currentScore;
-    }
-  } else {
-    if (player_1_turn) {
-      player_1_turn = false;
-      player_2_turn = true;
-      player_1_currentScore = 0;
-      document.querySelector(".current-score-1").textContent =
-        player_1_currentScore;
-      document.querySelector(".player-2-bg").style.backgroundColor = "#DBAEBA";
-      document.querySelector(".player-1-bg").style.backgroundColor = "#BD7A94";
-      document.querySelector(".header-1").classList.remove("font-bold");
-      document.querySelector(".header-2").classList.add("font-bold");
-    } else {
-      player_2_turn = false;
-      player_1_turn = true;
-      player_2_currentScore = 0;
-      document.querySelector(".current-score-2").textContent =
-        player_2_currentScore;
-      document.querySelector(".player-1-bg").style.backgroundColor = "#DBAEBA";
-      document.querySelector(".player-2-bg").style.backgroundColor = "#BD7A94";
-      document.querySelector(".header-2").classList.remove("font-bold");
-      document.querySelector(".header-1").classList.add("font-bold");
+      if (player_1_turn) {
+        player_1_turn = false;
+        player_2_turn = true;
+        player_1_currentScore = 0;
+        document.querySelector(".current-score-1").textContent =
+          player_1_currentScore;
+        document.querySelector(".player-2-bg").style.backgroundColor =
+          "#DBAEBA";
+        document.querySelector(".player-1-bg").style.backgroundColor =
+          "#BD7A94";
+        document.querySelector(".header-1").classList.remove("font-bold");
+        document.querySelector(".header-2").classList.add("font-bold");
+      } else {
+        player_2_turn = false;
+        player_1_turn = true;
+        player_2_currentScore = 0;
+        document.querySelector(".current-score-2").textContent =
+          player_2_currentScore;
+        document.querySelector(".player-1-bg").style.backgroundColor =
+          "#DBAEBA";
+        document.querySelector(".player-2-bg").style.backgroundColor =
+          "#BD7A94";
+        document.querySelector(".header-2").classList.remove("font-bold");
+        document.querySelector(".header-1").classList.add("font-bold");
+      }
     }
   }
 }
